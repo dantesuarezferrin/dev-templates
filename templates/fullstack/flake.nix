@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     devenv.url = "github:cachix/devenv";
   };
 
@@ -10,7 +10,11 @@
       systems = [ "x86_64-linux" ];
 
       perSystem = { config, self', inputs', pkgs, system, ... }: {
-        devenv.shells.default = import ./devenv.nix { inherit pkgs; };
+        devenv.shells.default = {
+          imports = [ ./devenv.nix ];
+          
+          inputs = inputs; 
+        };
       };
     };
 }
