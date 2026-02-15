@@ -1,6 +1,4 @@
-{ pkgs, lib, config, ... }:
-
-{
+{ pkgs, lib, config, ... }: {
   languages.python = {
     enable = true;
     venv.enable = true;
@@ -20,14 +18,14 @@
 
   packages = with pkgs; [
     nodePackages.typescript-language-server
-    pyright # LSP para Python
-    ripgrep
+    pyright
+    just
   ];
 
   scripts.dev.exec = "npm run dev & python manage.py runserver";
 
   enterShell = ''
-    echo "⚡ Entorno Fullstack Activo"
-    echo "PostgreSQL está listo en el puerto 5432"
+    echo "⚡ Entorno Fullstack de la Empresa Activo"
+    echo "Base de datos 'peluqueria_db' lista en puerto 5432"
   '';
 }

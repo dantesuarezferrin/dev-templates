@@ -7,13 +7,13 @@
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ inputs.devenv.flakeModule ];
-      systems = [ "x86_64-linux" ];
+      systems = [ "x86_64-linux" ]; # Podés agregar "aarch64-darwin" si un amigo usa Mac
 
       perSystem = { config, self', inputs', pkgs, system, ... }: {
         devenv.shells.default = {
+          devenv.root = ./.; 
+
           imports = [ ./devenv.nix ];
-          
-          inputs = inputs; 
         };
       };
     };
