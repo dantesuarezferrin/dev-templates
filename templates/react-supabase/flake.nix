@@ -6,7 +6,7 @@
     nixpkgs.follows = "devenv/nixpkgs";
   };
 
-  outputs = { self, nixpkgs, devenv, ... }:
+  outputs = inputs@{ self, nixpkgs, devenv, ... }:
   let
     system = "x86_64-linux";
   in {
