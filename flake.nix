@@ -25,7 +25,7 @@
 			};
 
 			peluqueria = {
-				path = ./templates/peluqueria
+				path = ./templates/peluqueria;
 				description = "Fullstack dev shell with React, python & SQL";
 			};
     };
