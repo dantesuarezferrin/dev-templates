@@ -23,6 +23,11 @@
 				path = ./templates/react-supabase;
 				description = "Fullstack dev shell with React, Supabase, TanStack & Zustand";
 			};
+
+			peluqueria = {
+				path = ./templates/peluqueria
+				description = "Fullstack dev shell with React, python & SQL";
+			};
     };
   };
 }
