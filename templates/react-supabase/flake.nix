@@ -1,18 +1,20 @@
 {
   inputs = {
-    nixpkgs.url = "github:cachix/devenv-nixpkgs/rolling";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     devenv.url = "github:cachix/devenv";
   };
-
-  outputs = inputs@{ self, nixpkgs, devenv, ... }:
-  let
-    system = "x86_64-linux";
-  in {
-    devShells.${system}.default =
-      devenv.lib.mkShell {
-        inherit inputs system;
-        modules = [ ./devenv.nix ];
-      };
-  };
+	outputs = { self, nixpkgs, devenv, ... }@inputs:
+	let
+  	system = "x86_64-linux";
+  	pkgs = import nixpkgs {
+  	  inherit system;
+  	};
+	in {
+  	devShells.${system}.default =
+    	devenv.lib.mkShell {
+      	inherit inputs pkgs;
+      	modules = [ ./devenv.nix ];
+    	};
+	};
 }
 
