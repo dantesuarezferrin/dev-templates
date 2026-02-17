@@ -19,7 +19,7 @@
         description = "Fullstack dev shell witch C#, Python & React";
       };
 			
-			react-supbase = {
+			react-supabase = {
 				path = ./templates/react-supabase;
 				description = "Fullstack dev shell with React, Supabase, TanStack & Zustand";
 			};

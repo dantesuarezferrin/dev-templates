@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 {
-  # Herramientas para el stack de React y Supabase
   languages.javascript = {
     enable = true;
     npm.enable = true;
