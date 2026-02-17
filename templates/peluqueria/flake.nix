@@ -1,22 +1,22 @@
 {
-  description = "SaaS booking app devshell";
+  description = "Peluqueria SaaS template";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
     devenv.url = "github:cachix/devenv";
-    devenv.inputs.nixpkgs.follows = "nixpkgs";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = inputs@{ self, nixpkgs, devenv, ... }:
-  let
-    system = "x86_64-linux";
-  in {
-    devShells.${system}.default =
-      devenv.lib.mkShell {
-        inherit inputs system;
-        modules = [ ./devenv.nix ];
-      };
-  };
+  outputs = { self, nixpkgs, devenv, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
+        devShells.default = devenv.lib.mkShell {
+          inherit pkgs;
+          modules = [ ./devenv.nix ];
+        };
+      });
 }
 
