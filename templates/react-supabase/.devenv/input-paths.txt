@@ -1,7 +1,0 @@
-/home/dante/dev-templates/templates/react-supabase/.devenv/flake.json
-/home/dante/dev-templates/templates/react-supabase/.devenv.flake.nix
-/home/dante/dev-templates/templates/react-supabase/.env
-/home/dante/dev-templates/templates/react-supabase/devenv.local.nix
-/home/dante/dev-templates/templates/react-supabase/devenv.lock
-/home/dante/dev-templates/templates/react-supabase/devenv.nix
-/home/dante/dev-templates/templates/react-supabase/devenv.yaml

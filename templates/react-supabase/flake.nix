@@ -1,21 +1,20 @@
 {
-  description = "Template Fullstack: React, Supabase, TanStack & Zustand";
-
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:cachix/devenv-nixpkgs/rolling";
     devenv.url = "github:cachix/devenv";
-    flake-parts.url = "github:hercules-ci/flake-parts";
+
+    nixpkgs.follows = "devenv/nixpkgs";
   };
 
-  outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkPkgsFlip {
-      imports = [ inputs.devenv.flakeModule ];
-      systems = [ "x86_64-linux" ];
-
-      perSystem = { config, self', inputs', pkgs, system, ... }: {
-        devenv.shells.default = {
-          imports = [ ./devenv.nix ];
-        };
+  outputs = { self, nixpkgs, devenv, ... }:
+  let
+    system = "x86_64-linux";
+  in {
+    devShells.${system}.default =
+      devenv.lib.mkShell {
+        inherit inputs system;
+        modules = [ ./devenv.nix ];
       };
-    };
+  };
 }
+

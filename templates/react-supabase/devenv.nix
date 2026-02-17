@@ -1,29 +1,24 @@
 { pkgs, ... }:
 
 {
-  languages.javascript = {
-    enable = true;
-    npm.enable = true;
-  };
-
   packages = with pkgs; [
+    nodejs_20
+    nodePackages.pnpm
     supabase-cli
-    nodePackages.typescript-language-server
+    git
   ];
 
-  scripts.init-project.exec = ''
-    npm create vite@latest . -- --template react-ts
-    npm install
-    npm install @supabase/supabase-js \
-                @tanstack/react-query \
-                @tanstack/react-table \
-                zustand \
-                react-chartjs-2 \
-                chart.js
-    echo "✅ Stack completo instalado."
-  '';
+  languages.javascript.enable = true;
+
+  services.supabase.enable = true;
+
+  env = {
+    SUPABASE_DB_PASSWORD = "postgres";
+  };
 
   enterShell = ''
-    echo "🛠️  Entorno React-Supabase-TanStack cargado"
+    echo "🚀 React + Supabase devshell"
+    node -v
+    supabase --version
   '';
 }
