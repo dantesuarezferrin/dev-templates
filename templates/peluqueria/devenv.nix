@@ -16,7 +16,11 @@
   ];
 
   languages.javascript.enable = true;
-  languages.python.enable = true;
+  languages.python = {
+		enable = true;
+		venv.enable = true;
+		requirements = ./requirements.txt;
+	};
 
   scripts = {
 
