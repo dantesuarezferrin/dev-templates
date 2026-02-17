@@ -10,15 +10,39 @@
 
   languages.javascript.enable = true;
 
-  services.supabase.enable = true;
-
   env = {
-    SUPABASE_DB_PASSWORD = "postgres";
+    NODE_ENV = "development";
+  };
+
+  scripts = {
+
+    init.exec = ''
+      if [ ! -f package.json ]; then
+        echo "⚡ Creating React app..."
+        pnpm create vite . --template react
+        pnpm install
+      fi
+    '';
+
+    supabase-start.exec = ''
+      supabase start
+    '';
+
+    supabase-stop.exec = ''
+      supabase stop
+    '';
   };
 
   enterShell = ''
+    echo ""
     echo "🚀 React + Supabase devshell"
-    node -v
-    supabase --version
+    echo ""
+
+    echo "Available commands:"
+    echo "  init            -> create react app"
+    echo "  supabase-start  -> start local stack"
+    echo "  supabase-stop   -> stop it"
+    echo ""
   '';
 }
+
