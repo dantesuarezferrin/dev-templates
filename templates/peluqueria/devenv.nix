@@ -1,53 +1,43 @@
 { pkgs, ... }:
 
 {
+  # Paquetes del sistema para el SaaS
   packages = with pkgs; [
     nodejs_20
     nodePackages.pnpm
-
     python312
     python312Packages.pip
-    python312Packages.virtualenv
-
     docker
     docker-compose
-
     git
   ];
 
   languages.javascript.enable = true;
+  
+  # Configuración de Python corregida para el backend FastAPI
   languages.python = {
-		enable = true;
-		venv.enable = true;
-		requirements = ./requirements.txt;
-	};
+    enable = true;
+    venv = {
+			enable = true;
+			requirements = ./backend/requirements.txt;
+		};
+  };
 
   scripts = {
-
+    # Comando para crear la estructura inicial de VilLan
     init.exec = ''
       if [ ! -d backend ]; then
-        echo "Creating FastAPI backend..."
-        mkdir backend
-        cd backend
+        echo "🚀 Creando backend FastAPI..."
+        mkdir backend && cd backend
         python -m venv .venv
         source .venv/bin/activate
-
         pip install fastapi uvicorn sqlmodel psycopg[binary]
-
-        cat > main.py <<EOF
-from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.get("/")
-def root():
-    return {"status": "ok"}
-EOF
+        touch requirements.txt
         cd ..
       fi
 
       if [ ! -d frontend ]; then
-        echo "Creating React frontend..."
+        echo "🚀 Creando frontend React..."
         pnpm create vite frontend --template react-ts
         cd frontend
         pnpm install
@@ -56,35 +46,13 @@ EOF
       fi
     '';
 
-    db-start.exec = ''
-      docker compose up -d
-    '';
-
-    db-stop.exec = ''
-      docker compose down
-    '';
-
-    backend-dev.exec = ''
-      cd backend
-      source .venv/bin/activate
-      uvicorn main:app --reload
-    '';
-
-    frontend-dev.exec = ''
-      cd frontend
-      pnpm dev
-    '';
+    backend-dev.exec = "cd backend && source .venv/bin/activate && uvicorn app.main:app --reload";
+    frontend-dev.exec = "cd frontend && pnpm dev";
+		db-start.exec = "docker compose up -d ";
   };
 
   enterShell = ''
-    echo ""
-    echo "💈 SaaS Turnera Devshell"
-    echo ""
-
-    echo "init           -> scaffold project"
-    echo "db-start       -> start postgres"
-    echo "backend-dev    -> run fastapi"
-    echo "frontend-dev   -> run react"
-    echo ""
+    echo "💈 SaaS Turnera - Entorno de Desarrollo Listo"
+    echo "Tira 'init' para arrancar el proyecto por primera vez."
   '';
 }

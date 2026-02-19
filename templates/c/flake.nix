@@ -16,11 +16,11 @@
         cmake
         gnumake
         pkg-config
-        clang-tools # clangd 🔥
+        clang-tools
       ];
 
       shellHook = ''
-        echo "C devshell ready 🚀"
+        echo "C devshell ready "
       '';
     };
   };
