@@ -28,6 +28,11 @@
 				path = ./templates/peluqueria;
 				description = "Fullstack dev shell with React, python & SQL";
 			};
+
+			finanzas = {
+				path = ./templates/finanzas;
+				description = "Java devshell with JDK21 & Postgres & Gradle";
+			};
     };
   };
 }
