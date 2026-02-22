@@ -1,0 +1,7 @@
+/home/dante/dev-templates/templates/finanzas/.devenv/flake.json
+/home/dante/dev-templates/templates/finanzas/.devenv.flake.nix
+/home/dante/dev-templates/templates/finanzas/.env
+/home/dante/dev-templates/templates/finanzas/devenv.local.nix
+/home/dante/dev-templates/templates/finanzas/devenv.lock
+/home/dante/dev-templates/templates/finanzas/devenv.nix
+/home/dante/dev-templates/templates/finanzas/devenv.yaml
